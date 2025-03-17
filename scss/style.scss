@@ -52,8 +52,14 @@
 // scss-docs-end import-stack
 
 // Overridden rules
-//hello world
-// new test
-// je ne sais pas comment configurer l'utilitaire automatique dans WebStorm...
-// commande = sass --watch ./scss/style.scss:./styles.css
+.hero{
+  background-image: url('../assets/branding/cover.png');
+
+  & p {
+    color: $yellow;
+    font-size: larger;
+  }
+}
+
+
 
