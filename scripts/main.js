@@ -1,5 +1,11 @@
-console.log("Hello World! from main.js");
+function main() {
+    const model = new Model;
+    const vue = new Vue();
+    const controller = new Controller;
 
-console.log(recipes)
+    const searchBar = new SearchBar();
 
-const test = new Vue()
+    controller.initApp(model, vue);
+}
+
+main();

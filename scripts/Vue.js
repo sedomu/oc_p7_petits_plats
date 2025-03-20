@@ -1,8 +1,27 @@
 class Vue {
-    constructor() {
-        this.displayCard(recipes[10])
+
+    displayAppliancesOptions(appliancesOptions) {
+        const appliancesDropdown = document.querySelector('.appliances-options');
+        appliancesDropdown.innerHTML = '';
+        appliancesOptions.forEach(appliance => {
+            appliancesDropdown.insertAdjacentHTML('beforeend', `<li><a class="dropdown-item" href="#" data-filter-type="appliance">${appliance}</a></li>`)
+            appliancesDropdown.lastChild.addEventListener('click', e => {
+                console.log(
+                    "filter type = ",
+                    e.target.getAttribute('data-filter-type'),
+                    " - filter value = ",
+                    e.target.textContent
+                )
+            });
+        })
+
     }
 
+    /**
+     * From 1 recipe object, constructs a BootStrap recipe's card
+     * @param {object} recipe - A single object representing a recipe
+     * @returns {string} - Code block of the recipe's card (html code only)
+     */
     createCard(recipe){
         return `
         <div class="card col-3 m-3 p-0" >
@@ -16,8 +35,33 @@ class Vue {
         `
     }
 
-    displayCard(recipe){
-        const dom = document.querySelector(".cards-container");
-        dom.insertAdjacentHTML('afterbegin', this.createCard(recipe));
+    /**
+     * Inserts 1 card in a specified DOM Element
+     * @param {object} recipe - A single object representing a recipe
+     * @param {Element} domElement - DOM Element where the card has to be inserted
+     * @returns {void}
+     */
+    displayCard(recipe, domElement){
+        domElement.insertAdjacentHTML('afterbegin', this.createCard(recipe));
+    }
+
+    /**
+     * Updates the recipes' counter on the page
+     * @param {number} n - number of recipes to be displayed
+     * @returns {void}
+     */
+    updateCounter(n){
+        document.querySelector(".recipes-counter").innerText = `${n} recettes`;
+    }
+
+    /**
+     * Displays the content of the recipes' page (cards and counter)
+     * @param {array[Object]} recipes - list of recipes to be displayed
+     */
+    displayCards(recipes){
+        this.updateCounter(recipes.length);
+        const domElement = document.querySelector(".cards-container");
+        domElement.innerHTML = "";
+        recipes.forEach(recipe => {this.displayCard(recipe, domElement)});
     }
 }
