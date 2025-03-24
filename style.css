@@ -10290,7 +10290,7 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important; } }
 .hero {
-  background-image: url("../assets/branding/cover.png"); }
+  background-image: url("./assets/branding/cover.png"); }
   .hero p {
     color: #ffc107;
     font-size: larger; }
