@@ -53,7 +53,7 @@
 
 // Overridden rules
 .hero{
-  background-image: url('../assets/branding/cover.png');
+  background-image: url('./assets/branding/cover.png');
 
   & p {
     color: $yellow;
