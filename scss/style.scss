@@ -61,5 +61,14 @@
   }
 }
 
+.search-bar__suggestions {
+  padding: 0;
+  border: 0;
+
+  &>button:hover{
+    background-color: lighten($blue, 25%);
+  }
+}
+
 
 

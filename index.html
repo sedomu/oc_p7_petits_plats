@@ -7,6 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Les petits plats</title>
     <link rel="stylesheet" href="./style.css">
+
+    <script src="assets/data/recipes.js"></script>
+    <script src="scripts/Components/searchBarComponent.js"></script>
+
+    <script src="scripts/Model.js"></script>
+    <script src="scripts/Vue.js"></script>
+    <script src="scripts/Controller.js"></script>
+
+
+
+    <script src="scripts/main.js" defer></script>
+
+
 </head>
 <body>
     <div class="hero container-fluid">
@@ -19,9 +32,16 @@
             </div>
             <div class="col-8 my-5">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2 search-bar__input" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success search-bar__button" type="submit">Search</button>
                 </form>
+
+                <div class="form-control d-flex overflow-visible flex-column search-bar__suggestions">
+                    <button class="btn text-start" type="button">Test</button>
+                    <button class="btn text-start" type="button">Test</button>
+                    <button class="btn text-start" type="button">Test</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -48,7 +68,7 @@
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Appareils
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu appliances-options">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -70,7 +90,7 @@
                 </div>
             </div>
             <div class="col-2"></div>
-            <div class="col-2">Counter</div>
+            <div class="col-2 recipes-counter">Counter</div>
             <div class="col-1"></div>
         </div>
     </div>
@@ -79,55 +99,8 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
-                <div class="row justify-content-center">
-                    <div class="card col-3 m-3 p-0" >
-                        <img src="./assets/images/Recette01.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card col-3 m-3 p-0" >
-                        <img src="./assets/images/Recette02.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card col-3 m-3 p-0" >
-                        <img src="./assets/images/Recette03.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card col-3 m-3 p-0" >
-                        <img src="./assets/images/Recette04.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card col-3 m-3 p-0" >
-                        <img src="./assets/images/Recette05.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card col-3 m-3 p-0" >
-                        <img src="./assets/images/Recette06.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+                <div class="row justify-content-center cards-container">
+<!--                    I populate here recipes'cards-->
                 </div>
             </div>
             <div class="col-1"></div>
