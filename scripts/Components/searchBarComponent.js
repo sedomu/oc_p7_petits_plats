@@ -5,7 +5,36 @@ class SearchBar{
 
         this.domSearchInput.addEventListener("keyup", e => {this.handleSearch(e.target.value)});
 
+
         this.recipesFiltered = recipes;
+
+        this.customEvent = new CustomEvent("searching", { detail: "tmplate"})
+
+        this.suggestions = [];
+        // this.domSearchInput.addEventListener("searching", (e) => {
+        //
+        // });
+    }
+
+    suggestionHtml(suggestion){
+        return `
+            <button class="btn text-start" type="button">
+                    ${suggestion.name}
+               </button>
+        `
+    }
+
+    displaySuggestions(suggestions){
+        const domSuggestions = document.querySelector(".search-bar__suggestions");
+
+        domSuggestions.innerHTML = "";
+
+        const limit = Math.min(suggestions.length,6);
+
+        for (let i = 0; i < limit; i++){
+            domSuggestions.innerHTML += this.suggestionHtml(suggestions[i]);
+        }
+
     }
 
     getSubArray(searchTerm){
@@ -29,13 +58,23 @@ class SearchBar{
             }
         }
 
-        console.log(results);
-
+        return results;
     }
 
     handleSearch(searchTerm) {
+
         if (searchTerm.length > 2) {
-            this.getSubArray(searchTerm);
+            this.suggestions = this.getSubArray(searchTerm);
+            this.displaySuggestions(this.suggestions);
+        } else {
+            // let suggestions = []
+            this.suggestions[0] = {name: "Entrez minimum 3 caractères"};
+            this.displaySuggestions(this.suggestions);
         }
+
+        console.log("je lance l'event");
+        this.domSearchInput.dispatchEvent(this.customEvent);
+
+
     }
 }
