@@ -25,7 +25,7 @@ class Vue {
     createCard(recipe){
         return `
         <div class="card col-3 m-3 p-0" >
-            <img src="../assets/images/${recipe.image}" class="card-img-top" alt="${recipe.name}">
+            <img src="./assets/images/${recipe.image}" class="card-img-top" alt="${recipe.name}">
             <div class="card-body">
                 <h5 class="card-title">${recipe.name}</h5>
                 <p class="card-text">${recipe.description}</p>
