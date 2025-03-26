@@ -17,17 +17,12 @@ class Model {
     }
 
     getAvailableOptions(){
-        const appliances = new Set();
-        this.allRecipes.forEach((recipe) => {
-            appliances.add(recipe.appliance);
-        })
+        const result = new Set();
 
-        let appliancesOptions = [];
-        appliances.forEach(appliance => {
-            appliancesOptions.push(appliance);
-        })
-        appliancesOptions.sort((a, b) => a.localeCompare(b));
-        return appliancesOptions;
+        for (let i = 0; i < this.displayedRecipes.length; i++) {
+            result.add(this.displayedRecipes[i].appliance);
+        }
+        return result;
     }
 
     getSuggestions(searchTerm) {
