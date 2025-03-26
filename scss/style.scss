@@ -61,12 +61,13 @@
   }
 }
 
-.search-bar__suggestions {
-  padding: 0;
-  border: 0;
-
-  &>button:hover{
-    background-color: lighten($blue, 25%);
+.search-bar{
+  &__delete-button{
+    background-color: magenta;
+    display:none;
+  }
+  &__search-button{
+    background-color: cyan;
   }
 }
 

@@ -14,7 +14,6 @@ class Vue {
                 )
             });
         })
-
     }
 
     /**
@@ -45,6 +44,10 @@ class Vue {
         domElement.insertAdjacentHTML('afterbegin', this.createCard(recipe));
     }
 
+    displayNoRecipe(searchTerm, domElement){
+        domElement.insertAdjacentHTML('afterbegin', `<p>Aucune recette ne contient ${searchTerm} vous pouvez rechercher "tarte aux pommes", "poisson', etc.</p>`);
+    }
+
     /**
      * Updates the recipes' counter on the page
      * @param {number} n - number of recipes to be displayed
@@ -57,11 +60,17 @@ class Vue {
     /**
      * Displays the content of the recipes' page (cards and counter)
      * @param {array[Object]} recipes - list of recipes to be displayed
+     * @param searchTerm
      */
-    displayCards(recipes){
+    displayCards(recipes, searchTerm = null){
         this.updateCounter(recipes.length);
         const domElement = document.querySelector(".cards-container");
         domElement.innerHTML = "";
-        recipes.forEach(recipe => {this.displayCard(recipe, domElement)});
+
+        if (recipes.length === 0){
+            this.displayNoRecipe(searchTerm, domElement);
+        } else {
+            recipes.forEach(recipe => {this.displayCard(recipe, domElement)});
+        }
     }
 }

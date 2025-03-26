@@ -4,10 +4,12 @@ class Controller{
         vue.displayCards(model.getAllRecipes())
         vue.displayAppliancesOptions(model.getAvailableOptions())
 
-        searchBar.domSearchInput.addEventListener("searching", () => {
-            console.log("je récupère l'event au niveau du controller");
-            console.log("avec les données de sugg:", searchBar.suggestions);
-            vue.displayCards(searchBar.suggestions);
-        });
+        searchBar.domSearchInput.addEventListener("searchTermComplete", (e) => {
+            vue.displayCards(model.getSuggestions(e.target.value), e.target.value);
+        })
+
+        searchBar.domSearchInput.addEventListener("searchTermTooShort", () => {
+            vue.displayCards(model.getAllRecipes())
+        })
     }
 }

@@ -10295,10 +10295,10 @@ textarea.form-control-lg {
     color: #ffc107;
     font-size: larger; }
 
-.search-bar__suggestions {
-  padding: 0;
-  border: 0; }
-  .search-bar__suggestions > button:hover {
-    background-color: #8bbafe; }
+.search-bar__delete-button {
+  background-color: magenta;
+  display: none; }
+.search-bar__search-button {
+  background-color: cyan; }
 
 /*# sourceMappingURL=style.css.map */
