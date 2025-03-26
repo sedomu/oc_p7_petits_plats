@@ -5,8 +5,6 @@ function main() {
 
     const searchBar = new SearchBar();
 
-
-
     controller.initApp(model, vue, searchBar);
 }
 
