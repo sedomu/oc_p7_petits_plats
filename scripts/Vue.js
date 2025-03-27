@@ -74,5 +74,7 @@ class Vue {
         } else {
             recipes.forEach(recipe => {this.displaySingleCard(recipe, domElement)});
         }
+
+        console.log("j'affiche dans ma vue : ", recipes);
     }
 }

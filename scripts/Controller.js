@@ -18,7 +18,9 @@ class Controller{
 
 
         document.addEventListener("useDropdown", (e) => {
-            vue.displayCards(model.tagSearch(e.detail));
+            console.log("j'ai utilisé le dropfown avec ", e.detail)
+            // vue.displayCards(model.handleTags(e.detail));
+            vue.displayCards(model.handleTags("add", "appliance", e.detail))
         })
     }
 }

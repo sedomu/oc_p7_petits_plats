@@ -6,6 +6,12 @@ function main() {
     const searchBar = new SearchBar();
 
     controller.initApp(model, vue, searchBar);
+
+
+//     testing area
+//     model.handleTags("add", "appliance", "oui");
+//     model.handleTags("add", "appliance", "non");
+//     model.handleTags("remove", "appliance", "oui");
 }
 
 main();
