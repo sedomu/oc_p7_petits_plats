@@ -15,9 +15,10 @@ class Controller{
             const appliancesDropdown = document.querySelector('.appliances-options');
             vue.displayOptions(appliancesDropdown, model.getAvailableOptions());
         })
-    }
 
-    updateEventListener(parentElement){
 
+        document.addEventListener("useDropdown", (e) => {
+            vue.displayCards(model.tagSearch(e.detail));
+        })
     }
 }

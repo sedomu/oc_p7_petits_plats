@@ -1,18 +1,21 @@
 class Vue {
     constructor() {
-        this.addApplianceTermEvent = new CustomEvent("addApplianceTerm", {});
+        // this.useDropdown = new CustomEvent("useDropdown", {});
+
+        this.appliancesDropdown = document.querySelector(".appliances-dropdown-button");
+        // this.appliancesDropdown.addEventListener("click", (e) => {
+        //     document.dispatchEvent(this.useDropdown);
+        // })
     }
 
     displayOptions(element, options) {
         element.innerHTML = "";
         options.forEach((option) => {
             element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="appliance">${option}</button></li>`)
+            element.lastElementChild.addEventListener("click", () => {
+                document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
+            });
         })
-
-
-        for (let i = 0; i < element.childElementCount; i++){
-            element.children[i].addEventListener('click', (e) => {console.log(e.target.textContent)});
-        }
     }
 
     /**

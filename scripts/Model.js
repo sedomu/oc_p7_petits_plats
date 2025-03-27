@@ -45,7 +45,21 @@ class Model {
             }
         }
 
-        this.displayedRecipes = tempResults;
+        this.displayedRecipes = [...tempResults];
+
+        return this.displayedRecipes;
+    }
+
+    tagSearch(appliance){
+        let tempResults = [];
+
+        for (let i = 0; i < this.displayedRecipes.length; i++) {
+            if (this.displayedRecipes[i].appliance === appliance) {
+                tempResults.push(this.displayedRecipes[i]);
+            }
+        }
+
+        this.displayedRecipes = [...tempResults];
 
         return this.displayedRecipes;
     }
