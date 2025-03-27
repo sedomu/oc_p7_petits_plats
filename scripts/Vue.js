@@ -1,17 +1,19 @@
 class Vue {
+    constructor() {
+        // this.useDropdown = new CustomEvent("useDropdown", {});
 
-    displayAppliancesOptions(appliancesOptions) {
-        const appliancesDropdown = document.querySelector('.appliances-options');
-        appliancesDropdown.innerHTML = '';
-        appliancesOptions.forEach(appliance => {
-            appliancesDropdown.insertAdjacentHTML('beforeend', `<li><a class="dropdown-item" href="#" data-filter-type="appliance">${appliance}</a></li>`)
-            appliancesDropdown.lastChild.addEventListener('click', e => {
-                console.log(
-                    "filter type = ",
-                    e.target.getAttribute('data-filter-type'),
-                    " - filter value = ",
-                    e.target.textContent
-                )
+        this.appliancesDropdown = document.querySelector(".appliances-dropdown-button");
+        // this.appliancesDropdown.addEventListener("click", (e) => {
+        //     document.dispatchEvent(this.useDropdown);
+        // })
+    }
+
+    displayOptions(element, options) {
+        element.innerHTML = "";
+        options.forEach((option) => {
+            element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="appliance">${option}</button></li>`)
+            element.lastElementChild.addEventListener("click", () => {
+                document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
             });
         })
     }
@@ -40,7 +42,7 @@ class Vue {
      * @param {Element} domElement - DOM Element where the card has to be inserted
      * @returns {void}
      */
-    displayCard(recipe, domElement){
+    displaySingleCard(recipe, domElement){
         domElement.insertAdjacentHTML('afterbegin', this.createCard(recipe));
     }
 
@@ -70,7 +72,7 @@ class Vue {
         if (recipes.length === 0){
             this.displayNoRecipe(searchTerm, domElement);
         } else {
-            recipes.forEach(recipe => {this.displayCard(recipe, domElement)});
+            recipes.forEach(recipe => {this.displaySingleCard(recipe, domElement)});
         }
     }
 }
