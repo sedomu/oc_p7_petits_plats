@@ -9,6 +9,8 @@ class Model {
         this.applianceTags = [];
         this.ustensilTags = [];
 
+        this.searchTerm = "";
+
         this.getAllRecipes();
         this.getAvailableOptions();
     }
@@ -58,7 +60,7 @@ class Model {
         return this.displayedRecipes;
     }
 
-    searchByTag(){
+    searchByTag(recipes){
         this.ingredientTags = [];
         this.applianceTags = [];
         this.ustensilTags = [];
@@ -79,16 +81,16 @@ class Model {
             }
         }
 
-        console.log(this.applianceTags);
+        console.log("applianceTags = ",this.applianceTags);
 
         let tempResults = []
 
-        for (let i = 0; i < this.recipesFilteredByText.length; i++) {
+        for (let i = 0; i < recipes.length; i++) {
             let ing = false;
             let app = false;
             let ust = false;
 
-            let testedRecipe = this.recipesFilteredByText[i];
+            let testedRecipe = recipes[i];
 
             // pour les ingrédients, à refaire pour chacun ensuite
             // à transformer en fonctions
@@ -108,12 +110,12 @@ class Model {
 
             // puis si les 3 sont true, l'entrée est ok
             if (app){
-                tempResults.push(this.recipesFilteredByText[i]);
+                tempResults.push(recipes[i]);
             }
         }
 
-        this.displayedRecipes = [...tempResults];
-        return this.displayedRecipes;
+        // this.displayedRecipes = [...tempResults];
+        return tempResults;
     }
 
     // searchByTag(){
@@ -142,7 +144,7 @@ class Model {
                 break;
         }
 
-        return this.searchByTag();
+        return 1
     }
 
     // tagSearch(appliance){
@@ -158,4 +160,35 @@ class Model {
     //
     //     return this.displayedRecipes;
     // }
+
+    searchDataPipeline(textSearch = this.searchTerm) {
+
+        console.log("###################DATA PIPELINE START##########################")
+
+        const allRecipes = this.allRecipes;
+        let results = [];
+
+        //je lance ma recherche texte avec mon textSearch
+        if (textSearch.length > 0){
+            this.searchTerm = textSearch;
+            results = this.getSuggestions(this.searchTerm);
+            console.log("TEXTSEARCH : je lance une recherche texte - le résultat est : ", results);
+        } else {
+            this.searchTerm = "";
+            results = this.allRecipes;
+            console.log("TEXTSEARCH : je retourne le tableau complet - le résultat est : ", results);
+        }
+
+        //j'ai un tableau results qui contient le résultat de ma recherche ou non recherche
+        //je lance ma recherche tags
+        console.log(this.searchByTag(results)); //ok
+        results = this.searchByTag(results);
+
+
+
+
+        console.log("###################DATA PIPELINE END##########################")
+
+        return results;
+    }
 }

@@ -1,10 +1,13 @@
 class Controller{
 
     initApp(model, vue, searchBar){
-        vue.displayCards(model.getAllRecipes())
+        // affichage des 50 recettes de base = initialisation de l'application
+        vue.displayCards(model.searchDataPipeline());
 
+        // event listeners
+        // dans la barre de recherche, j'ai 3 caractères+
         searchBar.domSearchInput.addEventListener("searchTermComplete", (e) => {
-            vue.displayCards(model.getSuggestions(e.target.value), e.target.value);
+            vue.displayCards(model.searchDataPipeline(e.target.value), e.target.value);
         })
 
         searchBar.domSearchInput.addEventListener("searchTermTooShort", () => {
@@ -18,9 +21,11 @@ class Controller{
 
 
         document.addEventListener("useDropdown", (e) => {
-            console.log("j'ai utilisé le dropfown avec ", e.detail)
+            console.log("j'ai utilisé le dropdown avec ", e.detail)
             // vue.displayCards(model.handleTags(e.detail));
-            vue.displayCards(model.handleTags("add", "appliance", e.detail))
+            // vue.displayCards(model.handleTags("add", "appliance", e.detail))
+            model.handleTags("add", "appliance", e.detail);
+            vue.displayCards(model.searchDataPipeline());
         })
     }
 }
