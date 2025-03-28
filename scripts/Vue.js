@@ -8,10 +8,10 @@ class Vue {
         // })
     }
 
-    displayOptions(element, options) {
+    displayOptions(type, element, options) {
         element.innerHTML = "";
         options.forEach((option) => {
-            element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="appliance">${option}</button></li>`)
+            element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="${type}">${option}</button></li>`)
             element.lastElementChild.addEventListener("click", () => {
                 document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
             });
@@ -74,7 +74,5 @@ class Vue {
         } else {
             recipes.forEach(recipe => {this.displaySingleCard(recipe, domElement)});
         }
-
-        console.log("j'affiche dans ma vue : ", recipes);
     }
 }

@@ -11,21 +11,28 @@ class Controller{
         })
 
         searchBar.domSearchInput.addEventListener("searchTermTooShort", () => {
-            vue.displayCards(model.getAllRecipes())
+            vue.displayCards(model.searchDataPipeline(""),"");
+        })
+
+        document.querySelector(".ingredients-dropdown-button").addEventListener("click", () => {
+            const ingredientsDropdown = document.querySelector('.ingredients-options');
+            vue.displayOptions("ingredient", ingredientsDropdown, model.getAvailableOptions("ingredients"));
         })
 
         document.querySelector(".appliances-dropdown-button").addEventListener("click", () => {
             const appliancesDropdown = document.querySelector('.appliances-options');
-            vue.displayOptions(appliancesDropdown, model.getAvailableOptions());
+            vue.displayOptions("appliance", appliancesDropdown, model.getAvailableOptions("appliances"));
         })
 
+        document.querySelector(".ustensils-dropdown-button").addEventListener("click", () => {
+            const ustensilsDropdown = document.querySelector('.ustensils-options');
+            vue.displayOptions("ustensil", ustensilsDropdown, model.getAvailableOptions("ustensils"));
+        })
 
         document.addEventListener("useDropdown", (e) => {
-            console.log("j'ai utilisé le dropdown avec ", e.detail)
-            // vue.displayCards(model.handleTags(e.detail));
-            // vue.displayCards(model.handleTags("add", "appliance", e.detail))
-            model.handleTags("add", "appliance", e.detail);
+            model.handleTags("add", e.explicitOriginalTarget.getAttribute("data-filter-type"), e.detail);
             vue.displayCards(model.searchDataPipeline());
+            console.log("##############mettre à jour les tag buttons")
         })
     }
 }

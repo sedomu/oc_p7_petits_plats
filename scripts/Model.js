@@ -26,12 +26,31 @@ class Model {
         return this.allRecipes;
     }
 
-    getAvailableOptions(){
+    getAvailableOptions(type){
         const result = new Set();
 
-        for (let i = 0; i < this.displayedRecipes.length; i++) {
-            result.add(this.displayedRecipes[i].appliance);
+        switch (type) {
+            case "ingredients":
+                for (let i = 0; i < this.displayedRecipes.length; i++) {
+                    for (let j = 0; j < this.displayedRecipes[i].ingredients.length; j++) {
+                        result.add(this.displayedRecipes[i].ingredients[j].ingredient);
+                    }
+                }
+                break;
+            case "appliances":
+                for (let i = 0; i < this.displayedRecipes.length; i++) {
+                    result.add(this.displayedRecipes[i].appliance);
+                }
+                break;
+            case "ustensils":
+                for (let i = 0; i < this.displayedRecipes.length; i++) {
+                    for (let j = 0; j < this.displayedRecipes[i].ustensils.length; j++) {
+                        result.add(this.displayedRecipes[i].ustensils[j]);
+                    }
+                }
+                break;
         }
+
         return result;
     }
 
@@ -81,7 +100,9 @@ class Model {
             }
         }
 
+        console.log("ingredientTags = ",this.ingredientTags);
         console.log("applianceTags = ",this.applianceTags);
+        console.log("ustensilTags = ",this.ustensilTags);
 
         let tempResults = []
 
@@ -118,20 +139,6 @@ class Model {
         return tempResults;
     }
 
-    // searchByTag(){
-    //     let tempResults = [];
-    //
-    //     for (let i = 0; i < this.displayedRecipes.length; i++) {
-    //         if (this.displayedRecipes[i].appliance === appliance) {
-    //             tempResults.push(this.displayedRecipes[i]);
-    //         }
-    //     }
-    //
-    //     this.displayedRecipes = [...tempResults];
-    //
-    //     return this.displayedRecipes;
-    // }
-
     handleTags(action, type, term){
         switch (action) {
             case "add":
@@ -147,26 +154,12 @@ class Model {
         return 1
     }
 
-    // tagSearch(appliance){
-    //     let tempResults = [];
-    //
-    //     for (let i = 0; i < this.displayedRecipes.length; i++) {
-    //         if (this.displayedRecipes[i].appliance === appliance) {
-    //             tempResults.push(this.displayedRecipes[i]);
-    //         }
-    //     }
-    //
-    //     this.displayedRecipes = [...tempResults];
-    //
-    //     return this.displayedRecipes;
-    // }
-
     searchDataPipeline(textSearch = this.searchTerm) {
 
-        console.log("###################DATA PIPELINE START##########################")
+        console.log("↓↓↓↓ ###################DATA PIPELINE START##########################")
 
         const allRecipes = this.allRecipes;
-        let results = [];
+        let results;
 
         //je lance ma recherche texte avec mon textSearch
         if (textSearch.length > 0){
@@ -184,10 +177,7 @@ class Model {
         console.log(this.searchByTag(results)); //ok
         results = this.searchByTag(results);
 
-
-
-
-        console.log("###################DATA PIPELINE END##########################")
+        console.log("↑↑↑↑ ###################DATA PIPELINE END##########################")
 
         return results;
     }
