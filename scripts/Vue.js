@@ -59,6 +59,20 @@ class Vue {
         document.querySelector(".recipes-counter").innerText = `${n} recettes`;
     }
 
+    displayTags(tags){
+        const tagsSection = document.querySelector(".tags-section");
+        tagsSection.innerHTML = "";
+
+        for (let i = 0; i < tags.length; i++) {
+            const htmlCode = `<span class="badge text-bg-primary col-2" data-filter-type="${tags[i].type}">${tags[i].name} X</span>`
+            tagsSection.insertAdjacentHTML('beforeend', htmlCode);
+            tagsSection.lastElementChild.addEventListener("click", (e) => {
+               document.dispatchEvent(new CustomEvent('closeTag', {detail: tags[i].name}));
+               e.explicitOriginalTarget.innerHTML = "";
+            })
+        }
+    }
+
     /**
      * Displays the content of the recipes' page (cards and counter)
      * @param {array[Object]} recipes - list of recipes to be displayed

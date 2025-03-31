@@ -114,7 +114,25 @@ class Model {
             let testedRecipe = recipes[i];
 
             // pour les ingrédients, à refaire pour chacun ensuite
-            // à transformer en fonctions
+            // à transformer en functions
+            if (this.ingredientTags.length > 0){
+                let res = 0;
+                for (let j = 0; j < this.ingredientTags.length; j++) {
+                    for (let k = 0; k < testedRecipe.ingredients.length; k++) {
+                        if (testedRecipe.ingredients[k].ingredient === this.ingredientTags[j]){
+                            res += 1;
+                        }
+                    }
+                }
+                if (res === this.ingredientTags.length){
+                    ing = true;
+                }
+            } else {
+                ing = true;
+            }
+
+            // pour les appliances, à refaire pour chacun ensuite
+            // à transformer en functions
             if (this.applianceTags.length > 0){
                 let res = 0;
                 for (let j = 0; j < this.applianceTags.length; j++) {
@@ -129,13 +147,31 @@ class Model {
                 app = true;
             }
 
+            // pour les ustensils, à refaire pour chacun ensuite
+            // à transformer en functions
+            if (this.ustensilTags.length > 0){
+                let res = 0;
+                for (let j = 0; j < this.ustensilTags.length; j++) {
+                    for (let k = 0; k < testedRecipe.ustensils.length; k++) {
+                        if (testedRecipe.ustensils[k] === this.ustensilTags[j]){
+                            res += 1;
+                        }
+                    }
+                }
+                if (res === this.ustensilTags.length){
+                    ust = true;
+                }
+            } else {
+                ust = true;
+            }
+
             // puis si les 3 sont true, l'entrée est ok
-            if (app){
+            if (ing && app && ust){
                 tempResults.push(recipes[i]);
             }
         }
 
-        // this.displayedRecipes = [...tempResults];
+        this.displayedRecipes = [...tempResults];
         return tempResults;
     }
 
@@ -143,14 +179,11 @@ class Model {
         switch (action) {
             case "add":
                 this.allTags.push({"type":type, "name":term});
-                console.log("adding tag : ", action, type, term);
                 break;
             case "remove":
                 this.allTags = this.allTags.filter((tag) => tag.name !== term);
-                console.log("removing tag : ", action, type, term);
                 break;
         }
-
         return 1
     }
 
@@ -158,7 +191,6 @@ class Model {
 
         console.log("↓↓↓↓ ###################DATA PIPELINE START##########################")
 
-        const allRecipes = this.allRecipes;
         let results;
 
         //je lance ma recherche texte avec mon textSearch
