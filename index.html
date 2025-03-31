@@ -16,7 +16,7 @@
     <script src="scripts/Controller.js"></script>
 
     <script src="scripts/main.js" defer></script>
-
+    <script src="scripts/Services/services.js"></script>
 
 
 </head>
@@ -52,11 +52,11 @@
             <div class="col-6">
                 <div class="row">
                     <div class="col">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown ingredients-dropdown-container">
+                            <button class="btn btn-secondary dropdown-toggle ingredients-dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ingrédients
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu ingredients-options">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -76,11 +76,11 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown ustensils-dropdown-container">
+                            <button class="btn btn-secondary dropdown-toggle ustensils-dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Ustensiles
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu ustensils-options">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -92,6 +92,11 @@
             <div class="col-2"></div>
             <div class="col-2 recipes-counter">Counter</div>
             <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row tags-section">
         </div>
     </div>
 

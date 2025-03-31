@@ -8,10 +8,10 @@ class Vue {
         // })
     }
 
-    displayOptions(element, options) {
+    displayOptions(type, element, options) {
         element.innerHTML = "";
         options.forEach((option) => {
-            element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="appliance">${option}</button></li>`)
+            element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="${type}">${option}</button></li>`)
             element.lastElementChild.addEventListener("click", () => {
                 document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
             });
@@ -57,6 +57,20 @@ class Vue {
      */
     updateCounter(n){
         document.querySelector(".recipes-counter").innerText = `${n} recettes`;
+    }
+
+    displayTags(tags){
+        const tagsSection = document.querySelector(".tags-section");
+        tagsSection.innerHTML = "";
+
+        for (let i = 0; i < tags.length; i++) {
+            const htmlCode = `<span class="badge text-bg-primary col-2" data-filter-type="${tags[i].type}">${tags[i].name} X</span>`
+            tagsSection.insertAdjacentHTML('beforeend', htmlCode);
+            tagsSection.lastElementChild.addEventListener("click", (e) => {
+               document.dispatchEvent(new CustomEvent('closeTag', {detail: tags[i].name}));
+               e.explicitOriginalTarget.innerHTML = "";
+            })
+        }
     }
 
     /**
