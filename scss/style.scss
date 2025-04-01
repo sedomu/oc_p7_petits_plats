@@ -51,23 +51,166 @@
 @import "./bootstrap/utilities/api";
 // scss-docs-end import-stack
 
+//fonts
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/Manrope-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/Anton-Regular.ttf");
+}
+
+:root {
+  --bs-body-font-family: "Manrope", sans-serif !important;
+}
+
+//Colors
+:root{
+  --cg-black-point: #000000;
+  --cg-yellow: #FFD15B;
+  --cg-grey-medium: #7A7A7A;
+  --cg-grey-light: #C6C6C6;
+  --cg-white-point: #ffffff;
+}
+
 // Overridden rules
 .hero{
   background-image: url('./assets/branding/cover.png');
 
   & p {
-    color: $yellow;
+    color: var(--cg-yellow);
     font-size: larger;
+  }
+
+  & .headline {
+    font-family: "Anton", sans-serif;
+    font-size: 2.75rem;
   }
 }
 
 .search-bar{
+  & > form{
+    position: relative;
+  }
+
+
+  &__input{
+    height: 72px;
+    padding-left: 34px;
+  }
+
   &__delete-button{
     background-color: magenta;
     display:none;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 28px;
+    bottom: 28px;
+    right: 84px;
+
+    & > img {
+      margin-top: -10px;
+    }
   }
+
   &__search-button{
-    background-color: cyan;
+    background-color: var(--cg-black-point);
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    top: 11px;
+    right: 20px;
+
+    & > img {
+      width: 28px;
+      margin: 11px;
+    }
+  }
+}
+
+.recipes-counter {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.313rem;
+}
+
+.recipe-card{
+  height: 730px;
+  width: 380px;
+  border-radius: 20px;
+  background-color: var(--cg-white-point);
+  overflow: hidden;
+  font-size: 0.875rem;
+  position: relative;
+
+  & .card-img-top {
+    height: 250px;
+  }
+
+  & .time-pill{
+    background-color: var(--cg-yellow);
+    font-size: 0.75rem;
+    width: 68px;
+    text-align: center;
+    border-radius: 14px;
+    padding: 5px 15px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  & .card-body{
+    padding: 26px;
+
+    & .card-title{
+      font-family: 'Anton', sans-serif;
+      font-size: 1.125rem;
+      margin: 6px 0 0 0;
+    }
+
+    & > h3 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--cg-grey-medium);
+      margin: 30px 0 15px 0;
+    }
+
+    & .card-text-container{
+      height: 88px;
+      overflow: hidden;
+
+    }
+
+
+    & .ingredients_container{
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 20px;
+
+      & .ingredient{
+        flex-basis: 50%;
+
+
+
+        & .ingredient_name{
+
+        }
+
+        & .ingredient_quantity{
+          color: var(--cg-grey-medium)
+        }
+      }
+    }
+
   }
 }
 
