@@ -13,7 +13,8 @@ class Vue {
         options.forEach((option) => {
             element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="${type}">${option}</button></li>`)
             element.lastElementChild.addEventListener("click", () => {
-                document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
+                // document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
+                document.dispatchEvent(new CustomEvent('useDropdown', {detail: {"type" : type, "term" : option}}));
             });
         })
     }
@@ -66,9 +67,8 @@ class Vue {
         for (let i = 0; i < tags.length; i++) {
             const htmlCode = `<span class="badge text-bg-primary col-2" data-filter-type="${tags[i].type}">${tags[i].name} X</span>`
             tagsSection.insertAdjacentHTML('beforeend', htmlCode);
-            tagsSection.lastElementChild.addEventListener("click", (e) => {
-               document.dispatchEvent(new CustomEvent('closeTag', {detail: tags[i].name}));
-               e.explicitOriginalTarget.innerHTML = "";
+            tagsSection.lastElementChild.addEventListener("click", () => {
+               document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : tags[i].type, "term" : tags[i].name}}));
             })
         }
     }
