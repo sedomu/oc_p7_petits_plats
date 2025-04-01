@@ -25,13 +25,26 @@ class Vue {
      * @returns {string} - Code block of the recipe's card (html code only)
      */
     createCard(recipe){
+        let ingredientsTemplate = "";
+        recipe.ingredients.forEach(element => {
+            ingredientsTemplate += `<div class="ingredient">
+                    <div class="ingredient_name">${element.ingredient}</div>
+                    <div class="ingredient_quantity">${element.quantity?element.quantity:"-"} ${element.unit?element.unit:""} </div>
+                </div>`
+        })
+
         return `
-        <div class="card col-3 m-3 p-0" >
+        <div class="card col-3 m-3 p-0 recipe-card" >
             <img src="./assets/images/${recipe.image}" class="card-img-top" alt="${recipe.name}">
+            <span class="time-pill">${recipe.time} min</span>
             <div class="card-body">
-                <h5 class="card-title">${recipe.name}</h5>
-                <p class="card-text">${recipe.description}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h2 class="card-title">${recipe.name}</h2>
+                <h3>RECETTE</h3>
+                <div class="card-text-container"><p class="card-text">${recipe.description}</p></div>
+                <h3>INGRÉDIENTS</h3>
+                <div class="ingredients_container">
+                    ${ingredientsTemplate}
+                </div>
             </div>
         </div>
         `

@@ -3,7 +3,7 @@ class Model {
         this.allRecipes = null;
         this.displayedRecipes = [];
 
-        this.recipesFilteredByText = [];
+        // this.recipesFilteredByText = [];
         this.allTags = [];
         this.ingredientTags = [];
         this.applianceTags = [];
