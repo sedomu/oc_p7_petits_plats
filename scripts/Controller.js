@@ -30,13 +30,13 @@ class Controller{
         })
 
         document.addEventListener("useDropdown", (e) => {
-            model.handleTags("add", e.explicitOriginalTarget.getAttribute("data-filter-type"), e.detail);
+            model.handleTags("add", e.detail.type, e.detail.term);
             vue.displayCards(model.searchDataPipeline());
             vue.displayTags(model.allTags);
         })
 
         document.addEventListener("closeTag", (e) => {
-            model.handleTags("remove", e.explicitOriginalTarget.getAttribute("data-filter-type"), e.detail)
+            model.handleTags("remove", e.detail.type, e.detail.term)
             vue.displayCards(model.searchDataPipeline());
             vue.displayTags(model.allTags);
         });
