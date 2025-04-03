@@ -10307,7 +10307,11 @@ textarea.form-control-lg {
   --cg-yellow: #FFD15B;
   --cg-grey-medium: #7A7A7A;
   --cg-grey-light: #C6C6C6;
+  --cg-grey-bg: #ededed;
   --cg-white-point: #ffffff; }
+
+body {
+  background: var(--cg-grey-bg); }
 
 .hero {
   background-image: url("./assets/branding/cover.png"); }
@@ -10346,6 +10350,44 @@ textarea.form-control-lg {
     width: 28px;
     margin: 11px; }
 
+.dropdown {
+  width: 200px; }
+
+.dropdown_button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--cg-white-point);
+  display: flex;
+  gap: 64px; }
+
+.dropdown_list {
+  width: 100%;
+  background-color: var(--cg-white-point);
+  max-height: 260px;
+  overflow-y: scroll;
+  list-style: none;
+  border-radius: 0 0 10px 10px;
+  scrollbar-width: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  border: none; }
+
+.dropdown_button.expanded {
+  border-radius: 10px 10px 0 0; }
+
+.dropdown_button.expanded > img {
+  transform: rotate(180deg); }
+
+.dropdown_button.expanded + .dropdown_list {
+  display: block; }
+
+.dropdown_button.expanded + .dropdown_list > li:hover {
+  background-color: var(--cg-yellow);
+  cursor: pointer; }
+
 .recipes-counter {
   font-family: 'Anton', sans-serif;
   font-size: 1.313rem; }
@@ -10359,7 +10401,9 @@ textarea.form-control-lg {
   font-size: 0.875rem;
   position: relative; }
   .recipe-card .card-img-top {
-    height: 250px; }
+    height: 250px;
+    object-fit: cover;
+    object-position: center; }
   .recipe-card .time-pill {
     background-color: var(--cg-yellow);
     font-size: 0.75rem;
