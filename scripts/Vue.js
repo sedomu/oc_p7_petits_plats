@@ -12,8 +12,9 @@ class Vue {
         element.innerHTML = "";
         options.forEach((option) => {
             element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="${type}">${option}</button></li>`)
-            element.lastElementChild.addEventListener("click", () => {
-                // document.dispatchEvent(new CustomEvent('useDropdown', {detail: option}));
+            element.lastElementChild.addEventListener("click", (e) => {
+                console.log(e.target)
+                e.target.parentElement.parentElement.previousElementSibling.classList.toggle("expanded");
                 document.dispatchEvent(new CustomEvent('useDropdown', {detail: {"type" : type, "term" : option}}));
             });
         })
@@ -78,9 +79,9 @@ class Vue {
         tagsSection.innerHTML = "";
 
         for (let i = 0; i < tags.length; i++) {
-            const htmlCode = `<span class="badge text-bg-primary col-2" data-filter-type="${tags[i].type}">${tags[i].name} X</span>`
+            const htmlCode = `<span class="badge col-2" data-filter-type="${tags[i].type}"><span>${tags[i].name}</span> <img src="../assets/icons/close.svg" alt="fermer"></span>`
             tagsSection.insertAdjacentHTML('beforeend', htmlCode);
-            tagsSection.lastElementChild.addEventListener("click", () => {
+            tagsSection.lastElementChild.lastElementChild.addEventListener("click", () => {
                document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : tags[i].type, "term" : tags[i].name}}));
             })
         }

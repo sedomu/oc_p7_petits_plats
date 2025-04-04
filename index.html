@@ -32,8 +32,8 @@
             <div class="col-8 my-5 search-bar">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2 search-bar__input" type="text" placeholder="Rechercher une recette, un ingrédient, ..." aria-label="Search">
-                    <span class="search-bar__delete-button"><img src="./assets/images/icons/quit-input.svg" alt="icône Fermer"></span>
-                    <span class="search-bar__search-button"><img src="./assets/images/icons/search.svg" alt="icône Rechercher"></span>
+                    <span class="search-bar__delete-button"><img src="./assets/icons/close.svg" alt="icône Fermer"></span>
+                    <span class="search-bar__search-button"><img src="./assets/icons/search.svg" alt="icône Rechercher"></span>
                 </form>
             </div>
         </div>
@@ -46,38 +46,20 @@
                 <div class="row">
                     <div class="col">
                         <div class="dropdown ingredients-dropdown-container">
-                            <button class="btn btn-secondary dropdown-toggle ingredients-dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ingrédients
-                            </button>
-                            <ul class="dropdown-menu ingredients-options">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <button class="dropdown_button ingredients-dropdown-button"><span>Ingrédients</span><img src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
+                            <ul class="dropdown_list dropdown-menu ingredients-options"></ul>
                         </div>
                     </div>
                     <div class="col">
                         <div class="dropdown appliances-dropdown-container">
-                            <button class="btn btn-secondary dropdown-toggle appliances-dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Appareils
-                            </button>
-                            <ul class="dropdown-menu appliances-options">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <button class="dropdown_button appliances-dropdown-button"><span>Appareils</span><img src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
+                            <ul class="dropdown_list dropdown-menu appliances-options"></ul>
                         </div>
                     </div>
                     <div class="col">
                         <div class="dropdown ustensils-dropdown-container">
-                            <button class="btn btn-secondary dropdown-toggle ustensils-dropdown-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Ustensiles
-                            </button>
-                            <ul class="dropdown-menu ustensils-options">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <button class="dropdown_button ustensils-dropdown-button"><span>Ustensiles</span><img src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
+                            <ul class="dropdown_list dropdown-menu ustensils-options"></ul>
                         </div>
                     </div>
                 </div>
@@ -88,8 +70,11 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row tags-section">
+    <div class="container-fluid my-5">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10 tags-section"></div>
+            <div class="col-1"></div>
         </div>
     </div>
 
@@ -97,15 +82,12 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
-                <div class="row justify-content-center cards-container">
+                <div class="row justify-content-start cards-container">
 <!--                    I populate here recipes'cards-->
                 </div>
             </div>
             <div class="col-1"></div>
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -76,10 +76,15 @@
   --cg-yellow: #FFD15B;
   --cg-grey-medium: #7A7A7A;
   --cg-grey-light: #C6C6C6;
+  --cg-grey-bg: #ededed;
   --cg-white-point: #ffffff;
 }
 
 // Overridden rules
+body {
+  background: var(--cg-grey-bg);
+}
+
 .hero{
   background-image: url('./assets/branding/cover.png');
 
@@ -106,17 +111,19 @@
   }
 
   &__delete-button{
-    background-color: magenta;
     display:none;
+    align-items: center;
     position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 28px;
-    bottom: 28px;
+    height: 100%;
     right: 84px;
 
     & > img {
-      margin-top: -10px;
+      width: 14px;
+      height: 14px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -136,9 +143,89 @@
   }
 }
 
+.filters .row {
+  row-gap: 10px;
+}
+
+
+.dropdown {
+  width: 200px;
+}
+
+.dropdown_button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--cg-white-point);
+  display: flex;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.dropdown_list{
+  width: 100%;
+  background-color: var(--cg-white-point);
+  max-height: 260px;
+  overflow-y: scroll;
+  list-style: none;
+  border-radius: 0 0 10px 10px;
+  scrollbar-width: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  border: none;
+}
+
+.dropdown_button.expanded {
+  border-radius: 10px 10px 0 0;
+}
+
+.dropdown_button.expanded > img {
+  transform: rotate(180deg);
+}
+
+.dropdown_button.expanded + .dropdown_list{
+  display: block;
+}
+
+.dropdown_button.expanded + .dropdown_list > li > button:hover{
+  background-color: var(--cg-yellow);
+  cursor: pointer;
+}
+
 .recipes-counter {
   font-family: 'Anton', sans-serif;
   font-size: 1.313rem;
+}
+
+.tags-section{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  & > .badge {
+    background-color: var(--cg-yellow);
+    color: var(--cg-black-point);
+    height: 52px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 18px;
+    font-size: 0.875rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+
+    & > img {
+      width: 10px;
+      height: 10px;
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .recipe-card{
@@ -152,6 +239,8 @@
 
   & .card-img-top {
     height: 250px;
+    object-fit: cover;
+    object-position: center;
   }
 
   & .time-pill{
@@ -213,6 +302,8 @@
 
   }
 }
+
+
 
 
 

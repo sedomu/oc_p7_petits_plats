@@ -29,6 +29,15 @@ class Controller{
             vue.displayOptions("ustensil", ustensilsDropdown, model.getAvailableOptions("ustensils"));
         })
 
+        let dropdown = document.querySelectorAll('button.dropdown_button');
+
+        dropdown.forEach((d) => {
+            d.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.target.closest('button').classList.toggle('expanded');
+            });
+        })
+
         document.addEventListener("useDropdown", (e) => {
             model.handleTags("add", e.detail.type, e.detail.term);
             vue.displayCards(model.searchDataPipeline());

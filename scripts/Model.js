@@ -3,7 +3,6 @@ class Model {
         this.allRecipes = null;
         this.displayedRecipes = [];
 
-        // this.recipesFilteredByText = [];
         this.allTags = [];
         this.ingredientTags = [];
         this.applianceTags = [];
@@ -15,15 +14,35 @@ class Model {
         this.getAvailableOptions();
     }
 
+    formatTag(tag){
+        return tag[0].toUpperCase() + tag.substring(1).toLowerCase();
+    }
+
     getAllRecipes() {
         if (this.allRecipes === null) {
             this.allRecipes = recipes;
         }
 
-        this.displayedRecipes = [...this.allRecipes];
-        this.recipesFilteredByText = [...this.allRecipes];
+        for (let i = 0; i < this.allRecipes.length; i++) {
+            this.allRecipes[i].ingredients.forEach(elem => {
+                elem.ingredient = this.formatTag(elem.ingredient);
+            })
+            this.allRecipes[i].ustensils.forEach((item, index, array) => {
+                array[index] = this.formatTag(item);
+            });
+            console.log(this.allRecipes[i].ustensils);
+        }
 
-        return this.allRecipes;
+        this.displayedRecipes = [...this.allRecipes];
+
+        console.log("####################################");
+        console.log(this.allRecipes);
+        this.allRecipes[0].ustensils.forEach(elem => {
+            console.log(typeof(elem));
+            console.log(this.formatTag(elem))
+        })
+        console.log("####################################");
+        console.log("####################################");
     }
 
     getAvailableOptions(type){
