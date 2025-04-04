@@ -10392,6 +10392,27 @@ body {
   background-color: var(--cg-yellow);
   cursor: pointer; }
 
+.dropdown_list > li {
+  height: 36px; }
+  .dropdown_list > li > button {
+    height: 100%;
+    padding: 0 16px; }
+
+.dropdown_list .selected-item {
+  background-color: var(--cg-yellow);
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .dropdown_list .selected-item > img {
+    display: none; }
+  .dropdown_list .selected-item:hover {
+    font-weight: 700; }
+    .dropdown_list .selected-item:hover > img {
+      display: inline; }
+
 .recipes-counter {
   font-family: 'Anton', sans-serif;
   font-size: 1.313rem; }

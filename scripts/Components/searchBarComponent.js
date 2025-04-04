@@ -16,7 +16,8 @@ class SearchBar{
     }
 
     handleSearch(searchTerm) {
-        this.searchTerm = searchTerm;
+        this.searchTerm = escapeInput(searchTerm.toLowerCase());
+        console.log(this.searchTerm);
         this.searchTermDeleteButton.style.display = "flex";
 
         if (searchTerm.length > 2) {

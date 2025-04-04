@@ -30,19 +30,9 @@ class Model {
             this.allRecipes[i].ustensils.forEach((item, index, array) => {
                 array[index] = this.formatTag(item);
             });
-            console.log(this.allRecipes[i].ustensils);
         }
 
         this.displayedRecipes = [...this.allRecipes];
-
-        console.log("####################################");
-        console.log(this.allRecipes);
-        this.allRecipes[0].ustensils.forEach(elem => {
-            console.log(typeof(elem));
-            console.log(this.formatTag(elem))
-        })
-        console.log("####################################");
-        console.log("####################################");
     }
 
     getAvailableOptions(type){
@@ -55,16 +45,33 @@ class Model {
                         result.add(this.displayedRecipes[i].ingredients[j].ingredient);
                     }
                 }
+
+                for (let i = 0; i < this.ingredientTags.length; i++) {
+                    if (result.has(this.ingredientTags[i])) {
+                        result.delete(this.ingredientTags[i]);
+                    }
+                }
                 break;
             case "appliances":
                 for (let i = 0; i < this.displayedRecipes.length; i++) {
                     result.add(this.displayedRecipes[i].appliance);
+                }
+
+                for (let i = 0; i < this.applianceTags.length; i++) {
+                    if (result.has(this.applianceTags[i])) {
+                        result.delete(this.applianceTags[i]);
+                    }
                 }
                 break;
             case "ustensils":
                 for (let i = 0; i < this.displayedRecipes.length; i++) {
                     for (let j = 0; j < this.displayedRecipes[i].ustensils.length; j++) {
                         result.add(this.displayedRecipes[i].ustensils[j]);
+                    }
+                }
+                for (let i = 0; i < this.ustensilTags.length; i++) {
+                    if (result.has(this.ustensilTags[i])) {
+                        result.delete(this.ustensilTags[i]);
                     }
                 }
                 break;
@@ -103,8 +110,6 @@ class Model {
         this.applianceTags = [];
         this.ustensilTags = [];
 
-        console.log("all tags : ", this.allTags);
-
         for (let i = 0; i < this.allTags.length; i++) {
             switch (this.allTags[i].type){
                 case "ingredient":
@@ -118,10 +123,6 @@ class Model {
                     break;
             }
         }
-
-        console.log("ingredientTags = ",this.ingredientTags);
-        console.log("applianceTags = ",this.applianceTags);
-        console.log("ustensilTags = ",this.ustensilTags);
 
         let tempResults = []
 
@@ -208,7 +209,7 @@ class Model {
 
     searchDataPipeline(textSearch = this.searchTerm) {
 
-        console.log("↓↓↓↓ ###################DATA PIPELINE START##########################")
+        // console.log("↓↓↓↓ ###################DATA PIPELINE START##########################")
 
         let results;
 
@@ -216,19 +217,19 @@ class Model {
         if (textSearch.length > 0){
             this.searchTerm = textSearch;
             results = this.getSuggestions(this.searchTerm);
-            console.log("TEXTSEARCH : je lance une recherche texte - le résultat est : ", results);
+            // console.log("TEXTSEARCH : je lance une recherche texte - le résultat est : ", results);
         } else {
             this.searchTerm = "";
             results = this.allRecipes;
-            console.log("TEXTSEARCH : je retourne le tableau complet - le résultat est : ", results);
+            // console.log("TEXTSEARCH : je retourne le tableau complet - le résultat est : ", results);
         }
 
         //j'ai un tableau results qui contient le résultat de ma recherche ou non recherche
         //je lance ma recherche tags
-        console.log(this.searchByTag(results)); //ok
+        // console.log(this.searchByTag(results)); //ok
         results = this.searchByTag(results);
 
-        console.log("↑↑↑↑ ###################DATA PIPELINE END##########################")
+        // console.log("↑↑↑↑ ###################DATA PIPELINE END##########################")
 
         return results;
     }
