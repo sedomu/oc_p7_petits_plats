@@ -17,7 +17,7 @@ class SearchBar{
 
     handleSearch(searchTerm) {
         this.searchTerm = searchTerm;
-        this.searchTermDeleteButton.style.display = "inline";
+        this.searchTermDeleteButton.style.display = "flex";
 
         if (searchTerm.length > 2) {
             this.domSearchInput.dispatchEvent(this.searchTermCompleteEvent);

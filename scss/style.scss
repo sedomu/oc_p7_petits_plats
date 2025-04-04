@@ -111,17 +111,19 @@ body {
   }
 
   &__delete-button{
-    background-color: magenta;
     display:none;
+    align-items: center;
     position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 28px;
-    bottom: 28px;
+    height: 100%;
     right: 84px;
 
     & > img {
-      margin-top: -10px;
+      width: 14px;
+      height: 14px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -141,6 +143,11 @@ body {
   }
 }
 
+.filters .row {
+  row-gap: 10px;
+}
+
+
 .dropdown {
   width: 200px;
 }
@@ -152,6 +159,7 @@ body {
   border-radius: 10px;
   background-color: var(--cg-white-point);
   display: flex;
+  justify-content: space-between;
   gap: 64px;
 }
 
@@ -181,10 +189,6 @@ body {
   display: block;
 }
 
-//.dropdown_button.expanded + .dropdown_list > li{
-//  padding-left: 32px;
-//}
-
 .dropdown_button.expanded + .dropdown_list > li > button:hover{
   background-color: var(--cg-yellow);
   cursor: pointer;
@@ -196,6 +200,10 @@ body {
 }
 
 .tags-section{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
   & > .badge {
     background-color: var(--cg-yellow);
     color: var(--cg-black-point);
@@ -204,6 +212,19 @@ body {
     border-radius: 10px;
     padding: 18px;
     font-size: 0.875rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+
+    & > img {
+      width: 10px;
+      height: 10px;
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 }
 
