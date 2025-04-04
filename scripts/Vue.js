@@ -62,6 +62,7 @@ class Vue {
     }
 
     displayNoRecipe(searchTerm, domElement){
+        console.log(searchTerm);
         domElement.insertAdjacentHTML('afterbegin', `<p>Aucune recette ne contient ${searchTerm} vous pouvez rechercher "tarte aux pommes", "poisson', etc.</p>`);
     }
 
@@ -98,6 +99,7 @@ class Vue {
         domElement.innerHTML = "";
 
         if (recipes.length === 0){
+            console.log("AUCUN RESULTAT SREARCH TERM ======== ", searchTerm);
             this.displayNoRecipe(searchTerm, domElement);
         } else {
             recipes.forEach(recipe => {this.displaySingleCard(recipe, domElement)});

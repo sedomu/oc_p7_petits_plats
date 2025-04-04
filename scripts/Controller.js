@@ -6,8 +6,8 @@ class Controller{
 
         // event listeners
         // dans la barre de recherche, j'ai 3 caractères+
-        searchBar.domSearchInput.addEventListener("searchTermComplete", (e) => {
-            vue.displayCards(model.searchDataPipeline(e.target.value), e.target.value);
+        searchBar.domSearchInput.addEventListener("searchTermComplete", () => {
+            vue.displayCards(model.searchDataPipeline(searchBar.searchTerm), searchBar.searchTerm);
         })
 
         searchBar.domSearchInput.addEventListener("searchTermTooShort", () => {

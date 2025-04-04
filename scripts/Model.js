@@ -77,6 +77,9 @@ class Model {
         const regex = ".*(" + searchTerm + ").*";
         let tempResults = [];
 
+        console.log("FDFGHJKHGFDSFGHUGTFDDFGHJHGFGHGFDFGDFGDD");
+        console.log(searchTerm);
+
         for (let i = 0; i < this.allRecipes.length; i++) {
             let res = false;
             for (let j = 0; j < this.allRecipes[i].ingredients.length; j++) {
