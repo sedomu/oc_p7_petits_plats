@@ -8,12 +8,25 @@ class Vue {
         // })
     }
 
-    displayOptions(type, element, options) {
+    displayOptions(type, element, options, selectedTags) {
         element.innerHTML = "";
-        options.forEach((option) => {
-            element.insertAdjacentHTML('beforeend', `<li><button class="dropdown-item" data-filter-type="${type}">${option}</button></li>`)
+
+        selectedTags.forEach(tag => {
+            element.insertAdjacentHTML(
+                'beforeend',
+                `<li class="controls-dd">
+                    <button class="selected-item controls-dd" data-filter-type="${type}"><span class="controls-dd">${tag}</span><img class="controls-dd" src="./assets/icons/list-close.svg" alt="supprimer le tag"></button>
+                </li>`
+            );
             element.lastElementChild.addEventListener("click", (e) => {
-                console.log(e.target)
+                e.target.closest("ul").previousElementSibling.classList.toggle("expanded");
+                document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : "ingredient", "term" : tag}}));
+            });
+        })
+
+        options.forEach((option) => {
+            element.insertAdjacentHTML('beforeend', `<li class="controls-dd"><button class="dropdown-item controls-dd" data-filter-type="${type}">${option}</button></li>`)
+            element.lastElementChild.addEventListener("click", (e) => {
                 e.target.parentElement.parentElement.previousElementSibling.classList.toggle("expanded");
                 document.dispatchEvent(new CustomEvent('useDropdown', {detail: {"type" : type, "term" : option}}));
             });
@@ -62,7 +75,6 @@ class Vue {
     }
 
     displayNoRecipe(searchTerm, domElement){
-        console.log(searchTerm);
         domElement.insertAdjacentHTML('afterbegin', `<p>Aucune recette ne contient ${searchTerm} vous pouvez rechercher "tarte aux pommes", "poisson', etc.</p>`);
     }
 
@@ -99,7 +111,6 @@ class Vue {
         domElement.innerHTML = "";
 
         if (recipes.length === 0){
-            console.log("AUCUN RESULTAT SREARCH TERM ======== ", searchTerm);
             this.displayNoRecipe(searchTerm, domElement);
         } else {
             recipes.forEach(recipe => {this.displaySingleCard(recipe, domElement)});
