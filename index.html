@@ -32,8 +32,8 @@
             <div class="col-8 my-5 search-bar">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2 search-bar__input" type="text" placeholder="Rechercher une recette, un ingrédient, ..." aria-label="Search">
-                    <span class="search-bar__delete-button"><img src="./assets/icons/close.svg" alt="icône Fermer"></span>
-                    <span class="search-bar__search-button"><img src="./assets/icons/search.svg" alt="icône Rechercher"></span>
+                    <span class="search-bar__delete-button"><img src="assets/icons/close-black.svg" alt="icône Fermer"></span>
+                    <span class="search-bar__search-button"><img src="" alt="icône Rechercher"></span>
                 </form>
             </div>
         </div>
@@ -46,26 +46,50 @@
                 <div class="row">
                     <div class="col">
                         <div class="dropdown ingredients-dropdown-container controls-dd">
-                            <button
-                                    class="dropdown_button ingredients-dropdown-button controls-dd"><span class="controls-dd">Ingrédients</span><img class="controls-dd" src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
-                            <ul
-                                    class="dropdown_list dropdown-menu ingredients-options controls-dd"></ul>
+                            <button class="dropdown_button ingredients-dropdown-button controls-dd"><span class="controls-dd">Ingrédients</span><img class="controls-dd" src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
+                            <div class="tag-search-container controls-dd">
+                                <input type="text"
+                                       class="tag-search-input ingredient-search-input controls-dd">
+                                <img class="tag-search-close controls-dd"
+                                     src="./assets/icons/close-grey.svg"
+                                     alt="fermer">
+                                <img class="tag-search-search controls-dd"
+                                     src="./assets/icons/search-grey.svg"
+                                     alt="fermer">
+                            </div>
+                            <ul class="dropdown_list dropdown-menu ingredients-options controls-dd"></ul>
                         </div>
                     </div>
                     <div class="col">
                         <div class="dropdown appliances-dropdown-container controls-dd">
-                            <button
-                                    class="dropdown_button appliances-dropdown-button controls-dd"><span class="controls-dd">Appareils</span><img class="controls-dd" src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
-                            <ul
-                                    class="dropdown_list dropdown-menu appliances-options controls-dd"></ul>
+                            <button class="dropdown_button appliances-dropdown-button controls-dd"><span class="controls-dd">Appareils</span><img class="controls-dd" src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
+                            <div
+                                    class="tag-search-container appliance-search-input controls-dd">
+                                <input type="text" class="tag-search-input controls-dd">
+                                <img class="tag-search-close controls-dd"
+                                     src="./assets/icons/close-grey.svg"
+                                     alt="fermer">
+                                <img class="tag-search-search controls-dd"
+                                     src="./assets/icons/search-grey.svg"
+                                     alt="chercher">
+                            </div>
+                            <ul class="dropdown_list dropdown-menu appliances-options controls-dd"></ul>
                         </div>
                     </div>
                     <div class="col">
                         <div class="dropdown ustensils-dropdown-container controls-dd">
-                            <button
-                                    class="dropdown_button ustensils-dropdown-button controls-dd"><span class="controls-dd">Ustensiles</span><img class="controls-dd" src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
-                            <ul
-                                    class="dropdown_list dropdown-menu ustensils-options controls-dd"></ul>
+                            <button class="dropdown_button ustensils-dropdown-button controls-dd"><span class="controls-dd">Ustensiles</span><img class="controls-dd" src="./assets/icons/arrow-down.svg" alt="déplier/replier"></button>
+                            <div class="tag-search-container controls-dd">
+                                <input type="text"
+                                       class="tag-search-input ustensil-search-input controls-dd">
+                                <img class="tag-search-close controls-dd"
+                                     src="./assets/icons/close-grey.svg"
+                                     alt="fermer">
+                                <img class="tag-search-search controls-dd"
+                                     src="./assets/icons/search-grey.svg"
+                                     alt="chercher">
+                            </div>
+                            <ul class="dropdown_list dropdown-menu ustensils-options controls-dd"></ul>
                         </div>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ class Model {
         this.displayedRecipes = [...this.allRecipes];
     }
 
-    getAvailableOptions(type){
+    getAvailableOptions(type, searchTerm = ""){
         const result = new Set();
 
         switch (type) {
@@ -77,7 +77,16 @@ class Model {
                 break;
         }
 
-        return result;
+        const regex = ".*(" + searchTerm + ").*";
+
+        let filteredArray = [];
+        result.values().forEach(element => {
+            if (element.toLowerCase().search(regex) >= 0){
+                filteredArray.push(element);
+            }
+        })
+
+        return filteredArray;
     }
 
     getSuggestions(searchTerm) {

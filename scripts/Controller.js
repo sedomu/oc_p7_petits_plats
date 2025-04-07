@@ -6,7 +6,7 @@ class Controller{
 
         // event listeners
 
-        // fermer tous les dropdowns
+        // fermer tous les dropdowns click outside
         document.addEventListener("click", (e) => {
             if (!e.target.classList.contains("controls-dd")){
                 const dropdownMenus = document.querySelectorAll(".dropdown_button.expanded");
@@ -44,7 +44,12 @@ class Controller{
         dropdown.forEach((d) => {
             d.addEventListener('click', (e) => {
                 e.preventDefault();
-                e.target.closest('button').classList.toggle('expanded');
+                if (e.target.closest(".dropdown_button").classList.contains("expanded")) {
+                    vue.dropdownMenus.forEach(menu => {menu.classList.remove("expanded");});
+                } else {
+                    vue.dropdownMenus.forEach(menu => {menu.classList.remove("expanded");});
+                    e.target.closest('.dropdown_button').classList.add('expanded');
+                }
             });
         })
 
@@ -59,5 +64,26 @@ class Controller{
             vue.displayCards(model.searchDataPipeline());
             vue.displayTags(model.allTags);
         });
+
+        let ingredientSearch = document.querySelector(".ingredient-search-input");
+        ingredientSearch.addEventListener("input", (e) => {
+                const ingredientsDropdown = document.querySelector('.ingredients-options');
+                vue.displayOptions("ingredient", ingredientsDropdown, model.getAvailableOptions("ingredients", escapeInput(e.target.value)), model.ingredientTags);
+        })
+
+        let applianceSearch = document.querySelector(".appliance-search-input");
+        applianceSearch.addEventListener("input", (e) => {
+            const appliancesDropdown = document.querySelector('.appliances-options');
+            vue.displayOptions("appliance", appliancesDropdown, model.getAvailableOptions("appliances", escapeInput(e.target.value)), model.applianceTags);
+        })
+
+
+        let ustensilSearch = document.querySelector(".ustensil-search-input");
+        ustensilSearch.addEventListener("input", (e) => {
+            const ustensilsDropdown = document.querySelector('.ustensils-options');
+            vue.displayOptions("ustensil", ustensilsDropdown, model.getAvailableOptions("ustensils", escapeInput(e.target.value)), model.ustensilTags);
+        })
+
+
     }
 }
