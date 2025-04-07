@@ -44,10 +44,14 @@ class Controller{
         dropdown.forEach((d) => {
             d.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (e.target.closest(".dropdown_button").classList.contains("expanded")) {
-                    vue.dropdownMenus.forEach(menu => {menu.classList.remove("expanded");});
-                } else {
-                    vue.dropdownMenus.forEach(menu => {menu.classList.remove("expanded");});
+                const dropdownIsOpened = e.target.closest(".dropdown_button").classList.contains("expanded");
+
+                vue.dropdownMenus.forEach(menu => {
+                    menu.classList.remove("expanded");
+                    menu.nextElementSibling.firstElementChild.value = "";
+                });
+
+                if (!dropdownIsOpened) {
                     e.target.closest('.dropdown_button').classList.add('expanded');
                 }
             });

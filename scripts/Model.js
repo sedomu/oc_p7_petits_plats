@@ -23,14 +23,15 @@ class Model {
             this.allRecipes = recipes;
         }
 
-        for (let i = 0; i < this.allRecipes.length; i++) {
-            this.allRecipes[i].ingredients.forEach(elem => {
-                elem.ingredient = this.formatTag(elem.ingredient);
+        this.allRecipes.forEach(recipe => {
+            recipe.ingredients.forEach(element => {
+                element.ingredient = this.formatTag(element.ingredient);
             })
-            this.allRecipes[i].ustensils.forEach((item, index, array) => {
-                array[index] = this.formatTag(item);
+
+            recipe.ustensils.forEach((element, index, array) => {
+                array[index] = this.formatTag(element);
             });
-        }
+        })
 
         this.displayedRecipes = [...this.allRecipes];
     }
@@ -89,29 +90,93 @@ class Model {
         return filteredArray;
     }
 
-    getSuggestions(searchTerm) {
+    searchByText(searchTerm) {
         const regex = ".*(" + searchTerm + ").*";
         let tempResults = [];
 
-        for (let i = 0; i < this.allRecipes.length; i++) {
-            let res = false;
-            for (let j = 0; j < this.allRecipes[i].ingredients.length; j++) {
-                if (this.allRecipes[i].ingredients[j].ingredient.search(regex) >= 0) {
-                    res = true;
-                }
-            }
+        this.allRecipes.forEach(recipe => {
+            let nestedIngredientsResult = false;
+
+            recipe.ingredients.forEach((element) => {
+                element.ingredient.search(regex) >= 0 ? nestedIngredientsResult = true : false;
+            })
+
             if (
-                res ||
-                this.allRecipes[i].name.search(regex) >= 0 ||
-                this.allRecipes[i].description.search(regex) >= 0
+                nestedIngredientsResult ||
+                recipe.name.search(regex) >= 0 ||
+                recipe.description.search(regex) >= 0
             ){
-                tempResults.push(this.allRecipes[i]);
+                tempResults.push(recipe);
             }
-        }
+        })
 
         this.displayedRecipes = [...tempResults];
 
         return this.displayedRecipes;
+    }
+
+    searchByIngredient(testedRecipe){
+        let testSuccessful = false;
+
+        if (this.ingredientTags.length > 0){
+            let res = 0;
+            for (let j = 0; j < this.ingredientTags.length; j++) {
+                for (let k = 0; k < testedRecipe.ingredients.length; k++) {
+                    if (testedRecipe.ingredients[k].ingredient === this.ingredientTags[j]){
+                        res += 1;
+                    }
+                }
+            }
+            if (res === this.ingredientTags.length){
+                testSuccessful = true;
+            }
+        } else {
+            testSuccessful = true;
+        }
+
+        return testSuccessful;
+    }
+
+    searchByAppliance(testedRecipe){
+        let testSuccessful = false;
+
+        if (this.applianceTags.length > 0){
+            let res = 0;
+            for (let j = 0; j < this.applianceTags.length; j++) {
+                if (testedRecipe.appliance === this.applianceTags[j]){
+                    res +=1;
+                }
+            }
+            if (res === this.applianceTags.length){
+                testSuccessful = true;
+            }
+        } else {
+            testSuccessful = true;
+        }
+
+        return testSuccessful;
+    }
+
+    searchByUstensil(testedRecipe){
+        let testSuccessful = false;
+
+        if (this.ustensilTags.length > 0){
+            let res = 0;
+            for (let j = 0; j < this.ustensilTags.length; j++) {
+                for (let k = 0; k < testedRecipe.ustensils.length; k++) {
+                    if (testedRecipe.ustensils[k] === this.ustensilTags[j]){
+                        res += 1;
+                    }
+                }
+            }
+            if (res === this.ustensilTags.length){
+                testSuccessful = true;
+            }
+        } else {
+            testSuccessful = true;
+        }
+
+        return testSuccessful;
     }
 
     searchByTag(recipes){
@@ -136,66 +201,13 @@ class Model {
         let tempResults = []
 
         for (let i = 0; i < recipes.length; i++) {
-            let ing = false;
-            let app = false;
-            let ust = false;
-
             let testedRecipe = recipes[i];
 
-            // pour les ingrédients, à refaire pour chacun ensuite
-            // à transformer en functions
-            if (this.ingredientTags.length > 0){
-                let res = 0;
-                for (let j = 0; j < this.ingredientTags.length; j++) {
-                    for (let k = 0; k < testedRecipe.ingredients.length; k++) {
-                        if (testedRecipe.ingredients[k].ingredient === this.ingredientTags[j]){
-                            res += 1;
-                        }
-                    }
-                }
-                if (res === this.ingredientTags.length){
-                    ing = true;
-                }
-            } else {
-                ing = true;
-            }
-
-            // pour les appliances, à refaire pour chacun ensuite
-            // à transformer en functions
-            if (this.applianceTags.length > 0){
-                let res = 0;
-                for (let j = 0; j < this.applianceTags.length; j++) {
-                    if (testedRecipe.appliance === this.applianceTags[j]){
-                        res +=1;
-                    }
-                }
-                if (res === this.applianceTags.length){
-                    app = true;
-                }
-            } else {
-                app = true;
-            }
-
-            // pour les ustensils, à refaire pour chacun ensuite
-            // à transformer en functions
-            if (this.ustensilTags.length > 0){
-                let res = 0;
-                for (let j = 0; j < this.ustensilTags.length; j++) {
-                    for (let k = 0; k < testedRecipe.ustensils.length; k++) {
-                        if (testedRecipe.ustensils[k] === this.ustensilTags[j]){
-                            res += 1;
-                        }
-                    }
-                }
-                if (res === this.ustensilTags.length){
-                    ust = true;
-                }
-            } else {
-                ust = true;
-            }
-
-            // puis si les 3 sont true, l'entrée est ok
-            if (ing && app && ust){
+            if (
+                this.searchByIngredient(testedRecipe) &&
+                this.searchByAppliance(testedRecipe) &&
+                this.searchByUstensil(testedRecipe)
+            ) {
                 tempResults.push(recipes[i]);
             }
         }
@@ -221,7 +233,7 @@ class Model {
 
         if (textSearch.length > 0){
             this.searchTerm = textSearch;
-            results = this.getSuggestions(this.searchTerm);
+            results = this.searchByText(this.searchTerm);
         } else {
             this.searchTerm = "";
             results = this.allRecipes;
