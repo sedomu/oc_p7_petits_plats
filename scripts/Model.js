@@ -217,28 +217,17 @@ class Model {
     }
 
     searchDataPipeline(textSearch = this.searchTerm) {
-
-        // console.log("↓↓↓↓ ###################DATA PIPELINE START##########################")
-
         let results;
 
-        //je lance ma recherche texte avec mon textSearch
         if (textSearch.length > 0){
             this.searchTerm = textSearch;
             results = this.getSuggestions(this.searchTerm);
-            // console.log("TEXTSEARCH : je lance une recherche texte - le résultat est : ", results);
         } else {
             this.searchTerm = "";
             results = this.allRecipes;
-            // console.log("TEXTSEARCH : je retourne le tableau complet - le résultat est : ", results);
         }
 
-        //j'ai un tableau results qui contient le résultat de ma recherche ou non recherche
-        //je lance ma recherche tags
-        // console.log(this.searchByTag(results)); //ok
         results = this.searchByTag(results);
-
-        // console.log("↑↑↑↑ ###################DATA PIPELINE END##########################")
 
         return results;
     }
