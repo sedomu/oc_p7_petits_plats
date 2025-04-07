@@ -19,8 +19,8 @@ class Vue {
                     <button class="selected-item controls-dd" data-filter-type="${type}"><span class="controls-dd">${tag}</span><img class="controls-dd" src="./assets/icons/list-close.svg" alt="supprimer le tag"></button>
                 </li>`
             );
-            element.lastElementChild.addEventListener("click", (e) => {
-                e.target.closest("ul").previousElementSibling.previousElementSibling.classList.toggle("expanded");
+            element.lastElementChild.addEventListener("click", () => {
+                // e.target.closest("ul").previousElementSibling.previousElementSibling.classList.toggle("expanded");
                 document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : "ingredient", "term" : tag}}));
             });
         })

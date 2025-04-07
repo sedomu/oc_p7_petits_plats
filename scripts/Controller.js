@@ -6,7 +6,7 @@ class Controller{
 
         // event listeners
 
-        // fermer tous les dropdowns
+        // fermer tous les dropdowns click outside
         document.addEventListener("click", (e) => {
             if (!e.target.classList.contains("controls-dd")){
                 const dropdownMenus = document.querySelectorAll(".dropdown_button.expanded");
@@ -44,11 +44,11 @@ class Controller{
         dropdown.forEach((d) => {
             d.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (e.target.classList.contains("expanded")) {
+                if (e.target.closest(".dropdown_button").classList.contains("expanded")) {
                     vue.dropdownMenus.forEach(menu => {menu.classList.remove("expanded");});
                 } else {
                     vue.dropdownMenus.forEach(menu => {menu.classList.remove("expanded");});
-                    e.target.closest('button').classList.toggle('expanded');
+                    e.target.closest('.dropdown_button').classList.add('expanded');
                 }
             });
         })

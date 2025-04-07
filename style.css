@@ -10346,9 +10346,14 @@ body {
   border-radius: 10px;
   top: 11px;
   right: 20px; }
+  .search-bar__search-button:hover {
+    background-color: var(--cg-yellow); }
+    .search-bar__search-button:hover > img {
+      content: url("./assets/icons/search-black.svg"); }
   .search-bar__search-button > img {
     width: 28px;
-    margin: 11px; }
+    margin: 11px;
+    content: url("./assets/icons/search-white.svg"); }
 
 .filters .row {
   row-gap: 10px; }
