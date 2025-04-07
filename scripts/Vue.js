@@ -2,10 +2,11 @@ class Vue {
     constructor() {
         // this.useDropdown = new CustomEvent("useDropdown", {});
 
-        this.appliancesDropdown = document.querySelector(".appliances-dropdown-button");
+        // this.appliancesDropdown = document.querySelector(".appliances-dropdown-button");
         // this.appliancesDropdown.addEventListener("click", (e) => {
         //     document.dispatchEvent(this.useDropdown);
         // })
+        this.dropdownMenus = document.querySelectorAll(".dropdown_button");
     }
 
     displayOptions(type, element, options, selectedTags) {
@@ -19,7 +20,7 @@ class Vue {
                 </li>`
             );
             element.lastElementChild.addEventListener("click", (e) => {
-                e.target.closest("ul").previousElementSibling.classList.toggle("expanded");
+                e.target.closest("ul").previousElementSibling.previousElementSibling.classList.toggle("expanded");
                 document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : "ingredient", "term" : tag}}));
             });
         })
@@ -27,7 +28,7 @@ class Vue {
         options.forEach((option) => {
             element.insertAdjacentHTML('beforeend', `<li class="controls-dd"><button class="dropdown-item controls-dd" data-filter-type="${type}">${option}</button></li>`)
             element.lastElementChild.addEventListener("click", (e) => {
-                e.target.parentElement.parentElement.previousElementSibling.classList.toggle("expanded");
+                e.target.closest("ul").previousElementSibling.previousElementSibling.classList.toggle("expanded");
                 document.dispatchEvent(new CustomEvent('useDropdown', {detail: {"type" : type, "term" : option}}));
             });
         })
@@ -92,7 +93,7 @@ class Vue {
         tagsSection.innerHTML = "";
 
         for (let i = 0; i < tags.length; i++) {
-            const htmlCode = `<span class="badge col-2" data-filter-type="${tags[i].type}"><span>${tags[i].name}</span> <img src="../assets/icons/close.svg" alt="fermer"></span>`
+            const htmlCode = `<span class="badge col-2" data-filter-type="${tags[i].type}"><span>${tags[i].name}</span> <img src="../assets/icons/close-black.svg" alt="fermer"></span>`
             tagsSection.insertAdjacentHTML('beforeend', htmlCode);
             tagsSection.lastElementChild.lastElementChild.addEventListener("click", () => {
                document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : tags[i].type, "term" : tags[i].name}}));
