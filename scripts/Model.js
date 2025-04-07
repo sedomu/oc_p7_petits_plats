@@ -23,15 +23,15 @@ class Model {
             this.allRecipes = recipes;
         }
 
-        for (let i = 0; i < this.allRecipes.length; i++) {
-            for (let j = 0; j < this.allRecipes[i].ingredients.length; j++) {
-                this.allRecipes[i].ingredients[j].ingredient = this.formatTag(this.allRecipes[i].ingredients[j].ingredient)
-            }
+        this.allRecipes.forEach(recipe => {
+            recipe.ingredients.forEach(element => {
+                element.ingredient = this.formatTag(element.ingredient);
+            })
 
-            for (let j = 0; j < this.allRecipes[i].ustensils.length; j++) {
-                this.allRecipes[i].ustensils[j] = this.formatTag(this.allRecipes[i].ustensils[j]);
-            }
-        }
+            recipe.ustensils.forEach((element, index, array) => {
+                array[index] = this.formatTag(element);
+            });
+        })
 
         this.displayedRecipes = [...this.allRecipes];
     }
@@ -94,21 +94,21 @@ class Model {
         const regex = ".*(" + searchTerm + ").*";
         let tempResults = [];
 
-        for (let i = 0; i < this.allRecipes.length; i++) {
-            let res = false;
-            for (let j = 0; j < this.allRecipes[i].ingredients.length; j++) {
-                if (this.allRecipes[i].ingredients[j].ingredient.search(regex) >= 0) {
-                    res = true;
-                }
-            }
+        this.allRecipes.forEach(recipe => {
+            let nestedIngredientsResult = false;
+
+            recipe.ingredients.forEach((element) => {
+                element.ingredient.search(regex) >= 0 ? nestedIngredientsResult = true : false;
+            })
+
             if (
-                res ||
-                this.allRecipes[i].name.search(regex) >= 0 ||
-                this.allRecipes[i].description.search(regex) >= 0
+                nestedIngredientsResult ||
+                recipe.name.search(regex) >= 0 ||
+                recipe.description.search(regex) >= 0
             ){
-                tempResults.push(this.allRecipes[i]);
+                tempResults.push(recipe);
             }
-        }
+        })
 
         this.displayedRecipes = [...tempResults];
 
