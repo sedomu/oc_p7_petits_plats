@@ -24,12 +24,13 @@ class Model {
         }
 
         for (let i = 0; i < this.allRecipes.length; i++) {
-            this.allRecipes[i].ingredients.forEach(elem => {
-                elem.ingredient = this.formatTag(elem.ingredient);
-            })
-            this.allRecipes[i].ustensils.forEach((item, index, array) => {
-                array[index] = this.formatTag(item);
-            });
+            for (let j = 0; j < this.allRecipes[i].ingredients.length; j++) {
+                this.allRecipes[i].ingredients[j].ingredient = this.formatTag(this.allRecipes[i].ingredients[j].ingredient)
+            }
+
+            for (let j = 0; j < this.allRecipes[i].ustensils.length; j++) {
+                this.allRecipes[i].ustensils[j] = this.formatTag(this.allRecipes[i].ustensils[j]);
+            }
         }
 
         this.displayedRecipes = [...this.allRecipes];
@@ -89,7 +90,7 @@ class Model {
         return filteredArray;
     }
 
-    getSuggestions(searchTerm) {
+    searchByText(searchTerm) {
         const regex = ".*(" + searchTerm + ").*";
         let tempResults = [];
 
@@ -114,6 +115,70 @@ class Model {
         return this.displayedRecipes;
     }
 
+    searchByIngredient(testedRecipe){
+        let testSuccessful = false;
+
+        if (this.ingredientTags.length > 0){
+            let res = 0;
+            for (let j = 0; j < this.ingredientTags.length; j++) {
+                for (let k = 0; k < testedRecipe.ingredients.length; k++) {
+                    if (testedRecipe.ingredients[k].ingredient === this.ingredientTags[j]){
+                        res += 1;
+                    }
+                }
+            }
+            if (res === this.ingredientTags.length){
+                testSuccessful = true;
+            }
+        } else {
+            testSuccessful = true;
+        }
+
+        return testSuccessful;
+    }
+
+    searchByAppliance(testedRecipe){
+        let testSuccessful = false;
+
+        if (this.applianceTags.length > 0){
+            let res = 0;
+            for (let j = 0; j < this.applianceTags.length; j++) {
+                if (testedRecipe.appliance === this.applianceTags[j]){
+                    res +=1;
+                }
+            }
+            if (res === this.applianceTags.length){
+                testSuccessful = true;
+            }
+        } else {
+            testSuccessful = true;
+        }
+
+        return testSuccessful;
+    }
+
+    searchByUstensil(testedRecipe){
+        let testSuccessful = false;
+
+        if (this.ustensilTags.length > 0){
+            let res = 0;
+            for (let j = 0; j < this.ustensilTags.length; j++) {
+                for (let k = 0; k < testedRecipe.ustensils.length; k++) {
+                    if (testedRecipe.ustensils[k] === this.ustensilTags[j]){
+                        res += 1;
+                    }
+                }
+            }
+            if (res === this.ustensilTags.length){
+                testSuccessful = true;
+            }
+        } else {
+            testSuccessful = true;
+        }
+
+        return testSuccessful;
+    }
+
     searchByTag(recipes){
         this.ingredientTags = [];
         this.applianceTags = [];
@@ -136,66 +201,13 @@ class Model {
         let tempResults = []
 
         for (let i = 0; i < recipes.length; i++) {
-            let ing = false;
-            let app = false;
-            let ust = false;
-
             let testedRecipe = recipes[i];
 
-            // pour les ingrédients, à refaire pour chacun ensuite
-            // à transformer en functions
-            if (this.ingredientTags.length > 0){
-                let res = 0;
-                for (let j = 0; j < this.ingredientTags.length; j++) {
-                    for (let k = 0; k < testedRecipe.ingredients.length; k++) {
-                        if (testedRecipe.ingredients[k].ingredient === this.ingredientTags[j]){
-                            res += 1;
-                        }
-                    }
-                }
-                if (res === this.ingredientTags.length){
-                    ing = true;
-                }
-            } else {
-                ing = true;
-            }
-
-            // pour les appliances, à refaire pour chacun ensuite
-            // à transformer en functions
-            if (this.applianceTags.length > 0){
-                let res = 0;
-                for (let j = 0; j < this.applianceTags.length; j++) {
-                    if (testedRecipe.appliance === this.applianceTags[j]){
-                        res +=1;
-                    }
-                }
-                if (res === this.applianceTags.length){
-                    app = true;
-                }
-            } else {
-                app = true;
-            }
-
-            // pour les ustensils, à refaire pour chacun ensuite
-            // à transformer en functions
-            if (this.ustensilTags.length > 0){
-                let res = 0;
-                for (let j = 0; j < this.ustensilTags.length; j++) {
-                    for (let k = 0; k < testedRecipe.ustensils.length; k++) {
-                        if (testedRecipe.ustensils[k] === this.ustensilTags[j]){
-                            res += 1;
-                        }
-                    }
-                }
-                if (res === this.ustensilTags.length){
-                    ust = true;
-                }
-            } else {
-                ust = true;
-            }
-
-            // puis si les 3 sont true, l'entrée est ok
-            if (ing && app && ust){
+            if (
+                this.searchByIngredient(testedRecipe) &&
+                this.searchByAppliance(testedRecipe) &&
+                this.searchByUstensil(testedRecipe)
+            ) {
                 tempResults.push(recipes[i]);
             }
         }
@@ -221,7 +233,7 @@ class Model {
 
         if (textSearch.length > 0){
             this.searchTerm = textSearch;
-            results = this.getSuggestions(this.searchTerm);
+            results = this.searchByText(this.searchTerm);
         } else {
             this.searchTerm = "";
             results = this.allRecipes;
