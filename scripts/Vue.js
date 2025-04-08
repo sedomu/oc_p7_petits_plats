@@ -1,11 +1,5 @@
 class Vue {
     constructor() {
-        // this.useDropdown = new CustomEvent("useDropdown", {});
-
-        // this.appliancesDropdown = document.querySelector(".appliances-dropdown-button");
-        // this.appliancesDropdown.addEventListener("click", (e) => {
-        //     document.dispatchEvent(this.useDropdown);
-        // })
         this.dropdownMenus = document.querySelectorAll(".dropdown_button");
     }
 
@@ -19,9 +13,9 @@ class Vue {
                     <button class="selected-item controls-dd" data-filter-type="${type}"><span class="controls-dd">${tag}</span><img class="controls-dd" src="./assets/icons/list-close.svg" alt="supprimer le tag"></button>
                 </li>`
             );
-            element.lastElementChild.addEventListener("click", () => {
-                // e.target.closest("ul").previousElementSibling.previousElementSibling.classList.toggle("expanded");
-                document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : "ingredient", "term" : tag}}));
+            element.lastElementChild.addEventListener("click", (e) => {
+                document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : type, "term" : tag}}));
+                e.target.closest(".dropdown").firstElementChild.classList.toggle("expanded");
             });
         })
 
