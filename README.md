@@ -9,3 +9,7 @@ OpenClassrooms - dév JS react - projet 7 - Les petits plats
 ## projet
 
 projet démarré le 20250311
+
+## benchmark des algorithmes de recherche
+
+[README](./algo_doc/jsbench/README.md)
