@@ -90,25 +90,23 @@ class Model {
         return filteredArray;
     }
 
-    searchByText(searchTerm) {
+    textSearchConditions(recipe, searchTerm) {
         const regex = ".*(" + searchTerm + ").*";
-        let tempResults = [];
 
-        this.allRecipes.forEach(recipe => {
-            let nestedIngredientsResult = false;
+        let nestedIngredientsResult = false;
 
-            recipe.ingredients.forEach((element) => {
-                element.ingredient.search(regex) >= 0 ? nestedIngredientsResult = true : false;
-            })
-
-            if (
-                nestedIngredientsResult ||
-                recipe.name.search(regex) >= 0 ||
-                recipe.description.search(regex) >= 0
-            ){
-                tempResults.push(recipe);
-            }
+        recipe.ingredients.forEach((element) => {
+            console.log(element.ingredient, searchTerm, element.ingredient.search(regex))
+            element.ingredient.search(regex) >= 0 ? nestedIngredientsResult = true : false;
         })
+
+        return nestedIngredientsResult ||
+            recipe.name.search(regex) >= 0 ||
+            recipe.description.search(regex) >= 0;
+    }
+
+    searchByText(searchTerm) {
+        let tempResults = this.allRecipes.filter(recipe => this.textSearchConditions(recipe, searchTerm));
 
         this.displayedRecipes = [...tempResults];
 

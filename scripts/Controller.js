@@ -75,7 +75,7 @@ class Controller{
         })
     }
 
-    initEventListeners(searchBar){
+    initEventListeners(model, vue, searchBar){
         searchBar.domSearchInput.addEventListener("searchTermComplete", () => {
             vue.displayCards(model.searchDataPipeline(searchBar.searchTerm), searchBar.searchTerm);
         })
@@ -88,7 +88,7 @@ class Controller{
     initApp(model, vue, searchBar){
         vue.displayCards(model.searchDataPipeline());
 
-        this.initEventListeners(searchBar);
+        this.initEventListeners(model, vue, searchBar);
         this.closeAllDropdown();
         this.initDropdownEventListeners(model, vue);
     }
