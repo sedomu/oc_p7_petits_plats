@@ -11,7 +11,6 @@ class Model {
         this.searchTerm = "";
 
         this.getAllRecipes();
-        this.getAvailableOptions();
     }
 
     formatTag(tag){
@@ -96,7 +95,6 @@ class Model {
         let nestedIngredientsResult = false;
 
         recipe.ingredients.forEach((element) => {
-            console.log(element.ingredient, searchTerm, element.ingredient.search(regex))
             element.ingredient.search(regex) >= 0 ? nestedIngredientsResult = true : false;
         })
 
