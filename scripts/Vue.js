@@ -87,7 +87,7 @@ class Vue {
         tagsSection.innerHTML = "";
 
         for (let i = 0; i < tags.length; i++) {
-            const htmlCode = `<span class="badge col-2" data-filter-type="${tags[i].type}"><span>${tags[i].name}</span> <img src="../assets/icons/close-black.svg" alt="fermer"></span>`
+            const htmlCode = `<span class="badge col-2" data-filter-type="${tags[i].type}"><span>${tags[i].name}</span> <img src="./assets/icons/close-black.svg" alt="fermer"></span>`
             tagsSection.insertAdjacentHTML('beforeend', htmlCode);
             tagsSection.lastElementChild.lastElementChild.addEventListener("click", () => {
                document.dispatchEvent(new CustomEvent('closeTag', {detail: {"type" : tags[i].type, "term" : tags[i].name}}));

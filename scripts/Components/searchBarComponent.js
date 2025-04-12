@@ -9,21 +9,17 @@ class SearchBar{
             this.handleSearch("");
         })
 
-        this.searchTermCompleteEvent = new CustomEvent("searchTermComplete", {});
-        this.searchTermTooShortEvent = new CustomEvent("searchTermTooShort", {});
-
         this.searchTerm = null;
     }
 
     handleSearch(searchTerm) {
         this.searchTerm = escapeInput(searchTerm.toLowerCase());
-        console.log(this.searchTerm);
         this.searchTermDeleteButton.style.display = "flex";
 
         if (searchTerm.length > 2) {
-            this.domSearchInput.dispatchEvent(this.searchTermCompleteEvent);
+            this.domSearchInput.dispatchEvent(new CustomEvent("searchTermComplete", {}));
         } else {
-            this.domSearchInput.dispatchEvent(this.searchTermTooShortEvent);
+            this.domSearchInput.dispatchEvent(new CustomEvent("searchTermTooShort", {}));
             if (searchTerm.length === 0){
                 this.searchTermDeleteButton.style.display = "none";
             }
