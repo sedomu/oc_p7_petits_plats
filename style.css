@@ -10309,7 +10309,7 @@ body {
   background: var(--cg-grey-bg); }
 
 .hero {
-  background-image: url("./assets/branding/cover.png"); }
+  background-image: url("./assets/branding/cover.webp"); }
   .hero p {
     color: var(--cg-yellow);
     font-size: larger; }
