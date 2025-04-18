@@ -94,10 +94,13 @@ class Model {
 
         let nestedIngredientsResult = false;
 
+        // looking inside ingredients' array to find text occurence
         recipe.ingredients.forEach((element) => {
             element.ingredient.search(regex) >= 0 ? nestedIngredientsResult = true : false;
         })
 
+        // if there is at least one text occurence in Ingredients OR Name OR Description
+        // Test returns True (to be displayed)
         return nestedIngredientsResult ||
             recipe.name.search(regex) >= 0 ||
             recipe.description.search(regex) >= 0;
@@ -114,19 +117,27 @@ class Model {
     searchByIngredient(testedRecipe){
         let testSuccessful = false;
 
-        if (this.ingredientTags.length > 0){
-            let res = 0;
+        if (this.ingredientTags.length > 0){ // run test if one or more ingredient tags are selected
+            let numberOfMatchingElements = 0;
+
+            // search through all occurrences to match the tag
+            //increments numberOfMatchingElements variable if sucess
             for (let j = 0; j < this.ingredientTags.length; j++) {
                 for (let k = 0; k < testedRecipe.ingredients.length; k++) {
                     if (testedRecipe.ingredients[k].ingredient === this.ingredientTags[j]){
-                        res += 1;
+                        numberOfMatchingElements += 1;
                     }
                 }
             }
-            if (res === this.ingredientTags.length){
+
+            // the test can only pass if all selected tags are present elements in the recipe
+            // the numberOfMatchingElements variable value must match the number of selected tags
+            if (numberOfMatchingElements === this.ingredientTags.length){
                 testSuccessful = true;
             }
+
         } else {
+            // test passes if no tag is selected
             testSuccessful = true;
         }
 
@@ -136,17 +147,25 @@ class Model {
     searchByAppliance(testedRecipe){
         let testSuccessful = false;
 
-        if (this.applianceTags.length > 0){
-            let res = 0;
+        if (this.applianceTags.length > 0){ // run test if one or more ingredient tags are selected
+            let numberOfMatchingElements = 0;
+
+            // search through all occurrences to match the tag
+            //increments numberOfMatchingElements variable if sucess
             for (let j = 0; j < this.applianceTags.length; j++) {
                 if (testedRecipe.appliance === this.applianceTags[j]){
-                    res +=1;
+                    numberOfMatchingElements +=1;
                 }
             }
-            if (res === this.applianceTags.length){
+
+            // the test can only pass if all selected tags are present elements in the recipe
+            // the numberOfMatchingElements variable value must match the number of selected tags
+            if (numberOfMatchingElements === this.applianceTags.length){
                 testSuccessful = true;
             }
+
         } else {
+            // test passes if no tag is selected
             testSuccessful = true;
         }
 
@@ -156,19 +175,26 @@ class Model {
     searchByUstensil(testedRecipe){
         let testSuccessful = false;
 
-        if (this.ustensilTags.length > 0){
-            let res = 0;
+        if (this.ustensilTags.length > 0){ // run test if one or more ingredient tags are selected
+            let numberOfMatchingElements = 0;
+            // search through all occurrences to match the tag
+            //increments numberOfMatchingElements variable if sucess
             for (let j = 0; j < this.ustensilTags.length; j++) {
                 for (let k = 0; k < testedRecipe.ustensils.length; k++) {
                     if (testedRecipe.ustensils[k] === this.ustensilTags[j]){
-                        res += 1;
+                        numberOfMatchingElements += 1;
                     }
                 }
             }
-            if (res === this.ustensilTags.length){
+
+            // the test can only pass if all selected tags are present elements in the recipe
+            // the numberOfMatchingElements variable value must match the number of selected tags
+            if (numberOfMatchingElements === this.ustensilTags.length){
                 testSuccessful = true;
             }
+
         } else {
+            // test passes if no tag is selected
             testSuccessful = true;
         }
 
@@ -176,6 +202,7 @@ class Model {
     }
 
     searchByTag(recipes){
+        //initialises subArrays for tags by genre (ingredient/appliance/ustensil) from allTags[]
         this.ingredientTags = [];
         this.applianceTags = [];
         this.ustensilTags = [];
@@ -194,6 +221,7 @@ class Model {
             }
         }
 
+        //launches searches by tags
         let tempResults = []
 
         for (let i = 0; i < recipes.length; i++) {
@@ -224,6 +252,7 @@ class Model {
         return 1
     }
 
+    // entry point for all searches - launches searchByText and searchByTags
     searchDataPipeline(textSearch = this.searchTerm) {
         let results;
 
