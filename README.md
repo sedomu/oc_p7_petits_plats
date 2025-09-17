@@ -5,8 +5,7 @@
 Source code of **Project 7 – Les petits plats**: _Develop a search algorithm with JavaScript_, completed as part of the **OpenClassrooms JavaScript React Developer path**.
 
 This project simulates the development of a **recipe search platform**, 
-where the main challenge is to design and implement an **efficient search 
-engine** in **vanilla JavaScript**, by designing a scalable search engine where performance and responsiveness directly impact user experience.
+where the main challenge is to **design and implement an efficient and scalable search engine** in vanilla JavaScript, where performance and responsiveness directly impact user experience.
 
 The work involved:
 - Building a responsive **user interface** with **Bootstrap**, focusing on usability and clarity of recipe search.
