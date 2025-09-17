@@ -2,4 +2,4 @@
 
 [jsben.ch](https://jsben.ch/RnJhm)
 
-![](./jsben.png)
+![JSBench results screenshot](./jsbench/jsben.png)
